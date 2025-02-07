@@ -1,0 +1,37 @@
+[
+  {
+  "name": "Madrid",
+  "local_names": {},
+  "lat": 40.4167047,
+  "lon": -3.7035825,
+  "country": "ES",
+  "state": "Community of Madrid"
+  },
+  {
+  "name": "Madrid",
+  "lat": 41.8766526,
+  "lon": -93.8232813,
+  "country": "US",
+  "state": "Iowa"
+  },
+  {
+  "name": "Madrid",
+  "lat": 4.7333686,
+  "lon": -74.2629794,
+  "country": "CO"
+  },
+  {
+  "name": "Madrid",
+  "lat": 31.035862,
+  "lon": -85.39815287941555,
+  "country": "US",
+  "state": "Alabama"
+  },
+  {
+  "name": "Madrid",
+  "lat": 35.4067261,
+  "lon": -106.1522134,
+  "country": "US",
+  "state": "New Mexico"
+  }
+  ]
