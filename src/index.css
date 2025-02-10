@@ -1,10 +1,10 @@
 @import "tailwindcss";
 
 @theme {
-  --color-prj-1: #292F36;
-  --color-prj-2: #8DA9C4;
-  --color-prj-3: #0B1422;
-  --color-prj-4: #0582CA;
-  --color-prj-5: #00A6FB;
+  --color-prj-1: #31302E;
+  --color-prj-2: #E5E5E5;
+  --color-prj-3: #FFFFFF;
+  --color-prj-4: #;
+  --color-prj-5: #;
   --font-poppins: Poppins, sans-serif;
 }
