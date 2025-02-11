@@ -1,0 +1,45 @@
+{
+  "coord": {
+  "lon": -3.7036,
+  "lat": 40.4167
+  },
+  "weather": [
+  {
+  "id": 802,
+  "main": "Clouds",
+  "description": "scattered clouds",
+  "icon": "03d"
+  }
+  ],
+  "base": "stations",
+  "main": {
+  "temp": 9.82,
+  "feels_like": 8.56,
+  "temp_min": 9.01,
+  "temp_max": 10.68,
+  "pressure": 1018,
+  "humidity": 73,
+  "sea_level": 1018,
+  "grnd_level": 943
+  },
+  "visibility": 10000,
+  "wind": {
+  "speed": 2.57,
+  "deg": 120
+  },
+  "clouds": {
+  "all": 40
+  },
+  "dt": 1739271136,
+  "sys": {
+  "type": 2,
+  "id": 2084029,
+  "country": "ES",
+  "sunrise": 1739258005,
+  "sunset": 1739295891
+  },
+  "timezone": 3600,
+  "id": 6544494,
+  "name": "Madrid City Center",
+  "cod": 200
+  }
