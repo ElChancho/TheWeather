@@ -1,45 +1,45 @@
 {
   "coord": {
-  "lon": -3.7036,
-  "lat": 40.4167
+    "lon": -3.7026,
+    "lat": 40.4165
   },
   "weather": [
-  {
-  "id": 802,
-  "main": "Clouds",
-  "description": "scattered clouds",
-  "icon": "03d"
-  }
+    {
+      "id": 803,
+      "main": "Clouds",
+      "description": "broken clouds",
+      "icon": "04n"
+    }
   ],
   "base": "stations",
   "main": {
-  "temp": 9.82,
-  "feels_like": 8.56,
-  "temp_min": 9.01,
-  "temp_max": 10.68,
-  "pressure": 1018,
-  "humidity": 73,
-  "sea_level": 1018,
-  "grnd_level": 943
+    "temp": 284.46,
+    "feels_like": 283.03,
+    "temp_min": 282.4,
+    "temp_max": 284.96,
+    "pressure": 1019,
+    "humidity": 53,
+    "sea_level": 1019,
+    "grnd_level": 944
   },
   "visibility": 10000,
   "wind": {
-  "speed": 2.57,
-  "deg": 120
+    "speed": 5.14,
+    "deg": 300
   },
   "clouds": {
-  "all": 40
+    "all": 75
   },
-  "dt": 1739271136,
+  "dt": 1739384150,
   "sys": {
-  "type": 2,
-  "id": 2084029,
-  "country": "ES",
-  "sunrise": 1739258005,
-  "sunset": 1739295891
+    "type": 2,
+    "id": 2084029,
+    "country": "ES",
+    "sunrise": 1739344333,
+    "sunset": 1739382363
   },
   "timezone": 3600,
-  "id": 6544494,
-  "name": "Madrid City Center",
+  "id": 6545083,
+  "name": "Sol",
   "cod": 200
-  }
+}

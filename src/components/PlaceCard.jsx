@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Button } from './Button'
 import { detailsPlace } from '../services/getDetailsPlace'
 
-export function PlaceCard ({ place }) {
+export function PlaceCard ({ place, setPlaceCardDetails, handleViewDetails }) {
   const [weatherData, setWeatherData] = useState(null)
 
   useEffect(() => {
@@ -31,7 +31,16 @@ export function PlaceCard ({ place }) {
         </div>
       )}
 
-      <Button className='absolute right-4 bottom-4 w-30'>View details</Button>
+      <Button
+        className='absolute right-4 bottom-4 w-30'
+        onClick={() => {
+          handleViewDetails()
+          setPlaceCardDetails(weatherData)
+          console.log('entró')
+        }}
+      >
+        View details
+      </Button>
     </div>
 
   )
