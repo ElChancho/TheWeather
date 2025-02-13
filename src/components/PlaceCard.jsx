@@ -1,8 +1,8 @@
 import { Button } from './Button'
 import { useWeatherData } from '../hooks/useWeatherData'
 
-export function PlaceCard ({ place, setDataCountry, setPlaceCardDetails, handleViewDetails }) {
-  const weatherState = useWeatherData({ place })
+export function PlaceCard ({ place, weatherCache, setDataCountry, setPlaceCardDetails, handleViewDetails }) {
+  const weatherState = useWeatherData({ place, weatherCache })
 
   return (
     <div className='relative flex flex-col pl-3 p-2 bg-prj-2 rounded-md w-full h-35'>

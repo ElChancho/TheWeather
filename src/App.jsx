@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { PlaceCard } from './components/PlaceCard'
 import { Header } from './components/Header'
 import { PlaceCardDetails } from './components/PlaceCardDetails'
@@ -11,6 +11,8 @@ function App () {
   const [dataCountry, setDataCountry] = useState()
 
   const placeState = usePlaces({ search })
+  const weatherCache = useRef({})
+  const forecastCache = useRef({})
 
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -57,6 +59,7 @@ function App () {
                         setDataCountry={setDataCountry}
                         setPlaceCardDetails={setPlaceCardDetails}
                         handleViewDetails={handleViewDetails}
+                        weatherCache={weatherCache}
                       />
                     )
                   })
@@ -71,6 +74,7 @@ function App () {
                 selectCardDetails={selectCardDetails}
                 dataCountry={dataCountry}
                 handleReturnPlaces={handleReturnPlaces}
+                forecastCache={forecastCache}
               />
 
             )

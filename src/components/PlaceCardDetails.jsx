@@ -1,8 +1,8 @@
 import { Forecast } from './Forecast'
 import { useForecast } from '../hooks/useForecast'
 
-export function PlaceCardDetails ({ placeCardDetails, selectCardDetails, dataCountry, handleReturnPlaces }) {
-  const forecastState = useForecast({ placeCardDetails })
+export function PlaceCardDetails ({ placeCardDetails, selectCardDetails, dataCountry, handleReturnPlaces, forecastCache }) {
+  const forecastState = useForecast({ placeCardDetails, forecastCache })
 
   return (
     <div className='flex flex-col gap-1.5 p-4 bg-prj-2 rounded-md md:w-180 h-180 w-110'>
