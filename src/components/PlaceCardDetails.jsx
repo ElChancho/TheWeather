@@ -1,40 +1,17 @@
-import { useState, useEffect } from 'react'
-// import placeCardDetailsJSON from '../mocks/results-details.json'
-// import resultsForecastData from '../mocks/results-details-forecast.json'
 import { Forecast } from './Forecast'
+import { useForecast } from '../hooks/useForecast'
 
-export function PlaceCardDetails ({ placeCardDetails, selectCardDetails, dataCountry }) {
-  // placeCardDetails = placeCardDetailsJSON // Acordarse de quitar esto
-  // Aqui hacer un useEffect que se ejecute una vez para obtener los datos del forecast con el siguiente url:
-  // https://api.openweathermap.org/data/2.5/forecast?lat=40.4167&lon=-3.7036&units=metric&appid=483ffd05a4c01d7ec198a95fd85c856a
-  // Tener en cuenta que tambien incluye el dia actual(cada 3 h) y los próximos 4 días
-  const [forecastData, setForecastData] = useState()
-
-  useEffect(() => {
-  // hacer la peticion a la api
-    const fetchForecast = async () => {
-      try {
-        const response = await fetch('https://api.openweathermap.org/data/2.5/forecast?lat=40.4167&lon=-3.7036&units=metric&appid=483ffd05a4c01d7ec198a95fd85c856a')
-        // console.log(new Date().toLocaleDateString('en') + ' ' + new Date().toLocaleTimeString('en'))
-        const resultsForecastData = await response.json()
-        // console.log('PLACECARDDETAILS ', ...placeCardDetails)
-        // const allData = resultsForecastData.list.unshift([...placeCardDetails])
-        // console.log('Alldata: ', allData)
-        setForecastData(resultsForecastData)
-      } catch (error) {
-        throw new Error('Could not fetch forecast data')
-      }
-    }
-    fetchForecast()
-    console.log('DATACOUNTRY: ', dataCountry)
-  }, [])
+export function PlaceCardDetails ({ placeCardDetails, selectCardDetails, dataCountry, handleReturnPlaces }) {
+  const forecastState = useForecast({ placeCardDetails })
 
   return (
-    // url para el forecast. Incluye el del día actual:
     <div className='flex flex-col gap-1.5 p-4 bg-prj-2 rounded-md md:w-180 h-180 w-110'>
-      <div className='flex items-center gap-2'>
+      <div className='relative flex items-center gap-2'>
         <h1 className='font-bold text-3xl'>{dataCountry.name}, {dataCountry.country} </h1>
         <img src={`https://flagcdn.com/${dataCountry.country.toLowerCase()}.svg`} alt={dataCountry.country} className='w-12 h-8' />
+        <svg onClick={handleReturnPlaces} className='absolute right-0 h-8 w-8 cursor-pointer hover:scale-110 transition' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
+          <path strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6' />
+        </svg>
       </div>
 
       <p>
@@ -86,12 +63,18 @@ export function PlaceCardDetails ({ placeCardDetails, selectCardDetails, dataCou
       </div>
 
       {
-        forecastData !== undefined && (
+        forecastState.forecastData !== undefined && (
           <div className='h-full w-full flex gap-3 overflow-x-auto'>
             {
-            forecastData.list.map((data) => {
+            forecastState.forecastData.list.map((data) => {
               return (
-                <Forecast key={data.dt} forecastData={data} selectCardDetails={() => { selectCardDetails(data) }} />
+                <Forecast
+                  key={data.dt} forecastData={data} selectCardDetails={() => {
+                    selectCardDetails(data)
+                    forecastState.setSelectedForecast(data.dt)
+                  }}
+                  isActive={forecastState.selectedForecast === data.dt}
+                />
               )
             })
           }

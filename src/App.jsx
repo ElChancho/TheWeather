@@ -1,20 +1,16 @@
-import { useEffect, useState } from 'react'
-import { searchPlace } from './services/getCoordinates'
+import { useState } from 'react'
 import { PlaceCard } from './components/PlaceCard'
 import { Header } from './components/Header'
 import { PlaceCardDetails } from './components/PlaceCardDetails'
+import { usePlaces } from './hooks/usePlaces'
 
 function App () {
   const [search, setSearch] = useState('')
-  const [places, setPlaces] = useState([])
   const [showPlaceCardDetails, setShowPlaceCardDetails] = useState(false) // Cambiarlo a false
   const [placeCardDetails, setPlaceCardDetails] = useState()
   const [dataCountry, setDataCountry] = useState()
 
-  // useEffect(() => {
-  //   console.log('showPlaceCardDetails', showPlaceCardDetails)
-  //   console.log('placeCardDetails', placeCardDetails)
-  // }, [placeCardDetails])
+  const placeState = usePlaces({ search })
 
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -22,8 +18,7 @@ function App () {
       console.log('Pon mas de 2 caracteres')
       return
     }
-    const foundPlaces = await searchPlace({ search })
-    setPlaces(foundPlaces)
+    placeState.getPlaces({ search })
     setShowPlaceCardDetails(false)
   }
 
@@ -33,6 +28,10 @@ function App () {
 
   const handleViewDetails = () => {
     setShowPlaceCardDetails(true)
+  }
+
+  const handleReturnPlaces = () => {
+    setShowPlaceCardDetails(false)
   }
 
   const selectCardDetails = (data) => {
@@ -46,12 +45,20 @@ function App () {
 
         <main className='flex justify-center mt-10 pb-10'>
           {
-            places.length === 0 && !showPlaceCardDetails
+            placeState.places.length === 0 && !showPlaceCardDetails
               ? 'Nothing was found! Try something else'
               : !showPlaceCardDetails && (<div className='flex flex-col gap-5 items-center max-w-180 w-4/5'>
                 {
-                  places.map((place) => {
-                    return <PlaceCard key={[place.lat, place.lon]} place={place} setDataCountry={setDataCountry} setPlaceCardDetails={setPlaceCardDetails} handleViewDetails={handleViewDetails} />
+                  placeState.places.map((place) => {
+                    return (
+                      <PlaceCard
+                        key={[place.lat, place.lon]}
+                        place={place}
+                        setDataCountry={setDataCountry}
+                        setPlaceCardDetails={setPlaceCardDetails}
+                        handleViewDetails={handleViewDetails}
+                      />
+                    )
                   })
                 }
               </div>
@@ -59,7 +66,12 @@ function App () {
           }
           {
             showPlaceCardDetails && (
-              <PlaceCardDetails placeCardDetails={placeCardDetails} selectCardDetails={selectCardDetails} dataCountry={dataCountry} />
+              <PlaceCardDetails
+                placeCardDetails={placeCardDetails}
+                selectCardDetails={selectCardDetails}
+                dataCountry={dataCountry}
+                handleReturnPlaces={handleReturnPlaces}
+              />
 
             )
           }
