@@ -4,12 +4,12 @@ import { PlaceCard } from './components/PlaceCard'
 import { Header } from './components/Header'
 import { PlaceCardDetails } from './components/PlaceCardDetails'
 
-
 function App () {
   const [search, setSearch] = useState('')
   const [places, setPlaces] = useState([])
-  const [showPlaceCardDetails, setShowPlaceCardDetails] = useState(true) // Cambiarlo a false
+  const [showPlaceCardDetails, setShowPlaceCardDetails] = useState(false) // Cambiarlo a false
   const [placeCardDetails, setPlaceCardDetails] = useState()
+  const [dataCountry, setDataCountry] = useState()
 
   // useEffect(() => {
   //   console.log('showPlaceCardDetails', showPlaceCardDetails)
@@ -35,6 +35,10 @@ function App () {
     setShowPlaceCardDetails(true)
   }
 
+  const selectCardDetails = (data) => {
+    setPlaceCardDetails(data)
+  }
+
   return (
     <>
       <div className='font-poppins text-black bg-prj-3 w-full h-full min-h-screen'>
@@ -47,7 +51,7 @@ function App () {
               : !showPlaceCardDetails && (<div className='flex flex-col gap-5 items-center max-w-180 w-4/5'>
                 {
                   places.map((place) => {
-                    return <PlaceCard key={[place.lat, place.lon]} place={place} setPlaceCardDetails={setPlaceCardDetails} handleViewDetails={handleViewDetails} />
+                    return <PlaceCard key={[place.lat, place.lon]} place={place} setDataCountry={setDataCountry} setPlaceCardDetails={setPlaceCardDetails} handleViewDetails={handleViewDetails} />
                   })
                 }
               </div>
@@ -55,7 +59,7 @@ function App () {
           }
           {
             showPlaceCardDetails && (
-              <PlaceCardDetails />
+              <PlaceCardDetails placeCardDetails={placeCardDetails} selectCardDetails={selectCardDetails} dataCountry={dataCountry} />
 
             )
           }

@@ -2,13 +2,15 @@ import { useEffect, useState } from 'react'
 import { Button } from './Button'
 import { detailsPlace } from '../services/getDetailsPlace'
 
-export function PlaceCard ({ place, setPlaceCardDetails, handleViewDetails }) {
+export function PlaceCard ({ place, setDataCountry, setPlaceCardDetails, handleViewDetails }) {
   const [weatherData, setWeatherData] = useState(null)
 
   useEffect(() => {
     const fetchDetails = async () => {
       try {
         const data = await detailsPlace({ place })
+        data.dt_txt = new Date().toLocaleDateString('en') + ' ' + new Date().toLocaleTimeString('en')
+        console.log('DATA en PLACECARD: ', data)
         setWeatherData(data)
       } catch (error) {
         console.error('Error fetching details: ', error)
@@ -36,6 +38,7 @@ export function PlaceCard ({ place, setPlaceCardDetails, handleViewDetails }) {
         onClick={() => {
           handleViewDetails()
           setPlaceCardDetails(weatherData)
+          setDataCountry(place)
           console.log('entró')
         }}
       >
