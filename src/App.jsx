@@ -6,7 +6,7 @@ import { usePlaces } from './hooks/usePlaces'
 
 function App () {
   const [search, setSearch] = useState('')
-  const [showPlaceCardDetails, setShowPlaceCardDetails] = useState(false) // Cambiarlo a false
+  const [showPlaceCardDetails, setShowPlaceCardDetails] = useState(false)
   const [placeCardDetails, setPlaceCardDetails] = useState()
   const [dataCountry, setDataCountry] = useState()
 
@@ -14,12 +14,7 @@ function App () {
   const weatherCache = useRef({})
   const forecastCache = useRef({})
 
-  const handleSubmit = async (event) => {
-    event.preventDefault()
-    if (search.length < 3) {
-      console.log('Pon mas de 2 caracteres')
-      return
-    }
+  const handleSubmit = () => {
     placeState.getPlaces({ search })
     setShowPlaceCardDetails(false)
   }
@@ -48,7 +43,7 @@ function App () {
         <main className='flex justify-center mt-10 pb-10'>
           {
             placeState.places.length === 0 && !showPlaceCardDetails
-              ? 'Nothing was found! Try something else'
+              ? 'Nothing found!'
               : !showPlaceCardDetails && (<div className='flex flex-col gap-5 items-center max-w-180 w-4/5'>
                 {
                   placeState.places.map((place) => {

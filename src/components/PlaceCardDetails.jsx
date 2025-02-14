@@ -1,11 +1,25 @@
+import { useRef } from 'react'
 import { Forecast } from './Forecast'
 import { useForecast } from '../hooks/useForecast'
 
 export function PlaceCardDetails ({ placeCardDetails, selectCardDetails, dataCountry, handleReturnPlaces, forecastCache }) {
   const forecastState = useForecast({ placeCardDetails, forecastCache })
+  const scrollRef = useRef(null)
+
+  const scrollLeft = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: -500, behavior: 'smooth' })
+    }
+  }
+
+  const scrollRight = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: 500, behavior: 'smooth' })
+    }
+  }
 
   return (
-    <div className='flex flex-col gap-1.5 p-4 bg-prj-2 rounded-md md:w-180 h-180 w-110'>
+    <div className='flex flex-col gap-1.5 p-4 bg-prj-2 rounded-md md:w-180 h-190 w-110'>
       <div className='relative flex items-center gap-2'>
         <h1 className='font-bold text-3xl'>{dataCountry.name}, {dataCountry.country} </h1>
         <img src={`https://flagcdn.com/${dataCountry.country.toLowerCase()}.svg`} alt={dataCountry.country} className='w-12 h-8' />
@@ -62,25 +76,39 @@ export function PlaceCardDetails ({ placeCardDetails, selectCardDetails, dataCou
 
       </div>
 
-      {
-        forecastState.forecastData !== undefined && (
-          <div className='h-full w-full flex gap-3 overflow-x-auto'>
-            {
-            forecastState.forecastData.list.map((data) => {
-              return (
-                <Forecast
-                  key={data.dt} forecastData={data} selectCardDetails={() => {
-                    selectCardDetails(data)
-                    forecastState.setSelectedForecast(data.dt)
-                  }}
-                  isActive={forecastState.selectedForecast === data.dt}
-                />
-              )
-            })
-          }
-          </div>
-        )
-      }
+      <div className='relative'>
+        <button
+          onClick={scrollLeft}
+          className='absolute z-10 left-0 top-1/2 transform -translate-y-1/2 cursor-pointer bg-gray-800 text-white px-2 py-1 rounded-full hover:bg-gray-700'
+        >
+          ◀
+        </button>
+
+        <div
+          ref={scrollRef}
+          className='flex gap-3 overflow-hidden scroll-smooth'
+        >
+          {forecastState.forecastData &&
+            forecastState.forecastData.list.map((data) => (
+              <Forecast
+                key={data.dt}
+                forecastData={data}
+                selectCardDetails={() => {
+                  selectCardDetails(data)
+                  forecastState.setSelectedForecast(data.dt)
+                }}
+                isActive={forecastState.selectedForecast === data.dt}
+              />
+            ))}
+        </div>
+
+        <button
+          onClick={scrollRight}
+          className='absolute z-10 right-0 top-1/2 transform -translate-y-1/2 cursor-pointer bg-gray-800 text-white px-2 py-1 rounded-full hover:bg-gray-700'
+        >
+          ▶
+        </button>
+      </div>
 
     </div>
 

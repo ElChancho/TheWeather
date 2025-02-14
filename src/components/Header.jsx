@@ -1,14 +1,30 @@
 import { Button } from './Button'
 import logo from '../assets/sun.svg'
+import { useState } from 'react'
+import { MessagePop } from './MessagePop'
 
 export function Header ({ search, handleSubmit, handleChange }) {
+  const [showMessagePop, setShowMessagePop] = useState(false)
+  const [messagePop, setMessagePop] = useState({})
+
+  const handleSubmitAux = (event) => {
+    event.preventDefault()
+
+    if (search.length < 3) {
+      setMessagePop({ text: 'Search with 3 or more characters!', isError: true })
+      setShowMessagePop(true)
+      return
+    }
+    handleSubmit()
+  }
+
   return (
     <header className='flex justify-center items-center gap-5 w-full h-32 border-b border-prj-2'>
       <div className='flex items-center gap-1.5'>
         <img src={logo} alt='logo' className='md:w-16 w-8' />
         <h1 className='md:text-6xl text-3xl font-bold'>Weather</h1>
       </div>
-      <form onSubmit={handleSubmit} className='flex gap-3 items-center mr-6 w-1/4 '>
+      <form onSubmit={handleSubmitAux} className='flex gap-3 items-center mr-6 w-1/4 '>
         <input onChange={handleChange} value={search} type='text' placeholder='Tenerife' className='bg-prj-2 rounded-md  p-1.5 w-2/3 min-w-40' />
         <Button typeButton='submit'>
           <svg className='h-6 w-6 text-prj-2' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
@@ -16,6 +32,12 @@ export function Header ({ search, handleSubmit, handleChange }) {
           </svg>
         </Button>
       </form>
+      {
+          showMessagePop && (
+            <MessagePop text={messagePop.text} isError={messagePop.isError} onClose={() => setShowMessagePop(false)} />
+          )
+        }
+
     </header>
   )
 }
