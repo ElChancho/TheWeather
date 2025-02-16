@@ -8,22 +8,22 @@ export function PlaceCardDetails ({ placeCardDetails, selectCardDetails, dataCou
 
   const scrollLeft = () => {
     if (scrollRef.current) {
-      scrollRef.current.scrollBy({ left: -500, behavior: 'smooth' })
+      scrollRef.current.scrollBy({ left: -250, behavior: 'smooth' })
     }
   }
 
   const scrollRight = () => {
     if (scrollRef.current) {
-      scrollRef.current.scrollBy({ left: 500, behavior: 'smooth' })
+      scrollRef.current.scrollBy({ left: 250, behavior: 'smooth' })
     }
   }
 
   return (
-    <div className='flex flex-col gap-1.5 p-4 bg-prj-2 rounded-md md:w-180 h-190 w-110'>
-      <div className='relative flex items-center gap-2'>
+    <div className='flex flex-col gap-1.5 p-4 bg-prj-2 rounded-md md:w-180 h-auto w-70'>
+      <div className='relative flex items-center gap-2 '>
         <h1 className='font-bold text-3xl'>{dataCountry.name}, {dataCountry.country} </h1>
         <img src={`https://flagcdn.com/${dataCountry.country.toLowerCase()}.svg`} alt={dataCountry.country} className='w-12 h-8' />
-        <svg onClick={handleReturnPlaces} className='absolute right-0 h-8 w-8 cursor-pointer hover:scale-110 transition' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
+        <svg onClick={handleReturnPlaces} className='absolute right-0 max-sm:-top-3 md:bottom-0 h-8 w-8 cursor-pointer hover:scale-110 transition' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
           <path strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6' />
         </svg>
       </div>
@@ -41,14 +41,14 @@ export function PlaceCardDetails ({ placeCardDetails, selectCardDetails, dataCou
         </div>
 
         <div className='flex flex-col items-center'>
-          <p className='font-bold text-5xl'>{Math.round(placeCardDetails.main.temp)} ºC</p>
+          <p className='font-bold md:text-5xl text-4xl'>{Math.round(placeCardDetails.main.temp)} ºC</p>
           <p>Min temp {Math.round(placeCardDetails.main.temp_min)} ºC</p>
           <p>Max temp {Math.round(placeCardDetails.main.temp_max)} ºC</p>
         </div>
 
       </div>
 
-      <div className='flex justify-evenly gap-2 pt-3 mb-3'>
+      <div className='flex flex-wrap justify-evenly gap-2 pt-3 mb-3'>
         <div className='flex flex-col text-center items-center'>
           <p className='font-bold'>Pressure</p>
           <p>{placeCardDetails.main.pressure} hPa</p>

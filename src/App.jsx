@@ -37,7 +37,7 @@ function App () {
 
   return (
     <>
-      <div className='font-poppins text-black bg-prj-3 w-full h-full min-h-screen'>
+      <div className='flex flex-col font-poppins text-black bg-prj-3 min-w-screen min-h-screen w-full h-full'>
         <Header search={search} handleChange={handleChange} handleSubmit={handleSubmit} />
 
         <main className='flex justify-center mt-10 pb-10'>
