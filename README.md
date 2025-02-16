@@ -2,6 +2,8 @@
 
 This is a small project done with **React** and **Taildwind CSS** to search the weather of a place
 
+Webiste: https://chancho-weather.netlify.app/
+
 ## Start project
 
 ````
