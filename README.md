@@ -1,8 +1,28 @@
-# React + Vite
+# The Weather #
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a small project done with **React** and **Taildwind CSS** to search the weather of a place
 
-Currently, two official plugins are available:
+## Start project
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+````
+git clone git@github.com:ElChancho/TheWeather.git
+cd TheWeather
+npm install
+````
+
+Now, you have to use an own API key from the API [OpenWeatherAPI](https://openweathermap.org/api)
+
+Write the API key in the **.env.template** file
+
+````
+VITE_API_URL=https://api.openweathermap.org/
+VITE_API_KEY='Your API key'
+````
+
+Then, run the next command to start the website
+
+````
+npm run dev
+````
+
+Done!
